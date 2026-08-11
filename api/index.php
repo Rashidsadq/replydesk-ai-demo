@@ -9,6 +9,7 @@ try {
     // 1. Setup writable /tmp storage
     $storagePath = '/tmp/storage';
     foreach ([
+        $storagePath . '/cache',
         $storagePath . '/framework/views',
         $storagePath . '/framework/sessions',
         $storagePath . '/framework/cache/data',
@@ -44,11 +45,7 @@ try {
 
     // 3. Force all storage and bootstrap manifest paths into writable /tmp/storage
     $app->useStoragePath($storagePath);
-    $app->setCachedServicesPath($storagePath . '/services.php');
-    $app->setCachedPackagesPath($storagePath . '/packages.php');
-    $app->setCachedRoutesPath($storagePath . '/routes.php');
-    $app->setCachedConfigPath($storagePath . '/config.php');
-    $app->setCachedEventsPath($storagePath . '/events.php');
+    $app->useBootstrapPath($storagePath);
 
     // 4. Instantiate Kernel and run full framework bootstrapping
     /** @var Kernel $kernel */
