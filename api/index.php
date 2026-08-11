@@ -21,46 +21,37 @@ try {
         }
     }
 
-    // 2. Setup SQLite database in /tmp
-    $dbPath = '/tmp/database.sqlite';
-    if (!file_exists($dbPath) && file_exists(__DIR__ . '/../database/database.sqlite')) {
-        @copy(__DIR__ . '/../database/database.sqlite', $dbPath);
-    } elseif (!file_exists($dbPath)) {
-        @touch($dbPath);
-    }
-
-    // 3. Set environment variables
+    // 2. Set environment variables
     putenv('APP_ENV=production');
     putenv('APP_DEBUG=true');
     putenv('APP_KEY=base64:k+GJlpYlO1Urpj9xPVTGF6PA/yvTLqQNnv53LnB3o64=');
-    putenv('DB_CONNECTION=sqlite');
-    putenv('DB_DATABASE=' . $dbPath);
     putenv('SESSION_DRIVER=cookie');
     putenv('CACHE_STORE=array');
     putenv('LOG_CHANNEL=stderr');
     putenv('VIEW_COMPILED_PATH=' . $storagePath . '/framework/views');
 
-    // 4. Load Composer Autoloader
+    // 3. Load Autoloader
     require __DIR__ . '/../vendor/autoload.php';
 
-    // 5. Bootstrap Laravel Application
+    // 4. Bootstrap Application
     $app = require_once __DIR__ . '/../bootstrap/app.php';
 
-    // 6. Force Laravel to use /tmp/storage
+    // 5. Force storage path to /tmp/storage
     $app->useStoragePath($storagePath);
 
-    // 7. Handle Request & Send Response
+    // 6. Handle Request
     $kernel = $app->make(Kernel::class);
-
     $request = Request::capture();
     $response = $kernel->handle($request);
     $response->send();
     $kernel->terminate($request, $response);
 
 } catch (\Throwable $e) {
-    http_response_code(500);
-    echo "<h1>Vercel PHP Execution Exception</h1>";
+    http_response_code(200);
+    header('Content-Type: text/html');
+    echo "<h1>Vercel PHP Execution Error Trace</h1>";
     echo "<p><strong>Message:</strong> " . htmlspecialchars($e->getMessage()) . "</p>";
     echo "<p><strong>File:</strong> " . htmlspecialchars($e->getFile()) . ":" . $e->getLine() . "</p>";
     echo "<pre>" . htmlspecialchars($e->getTraceAsString()) . "</pre>";
+    exit;
 }
