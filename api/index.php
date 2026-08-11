@@ -6,13 +6,7 @@ use Illuminate\Http\Request;
 try {
     define('LARAVEL_START', microtime(true));
 
-    // 1. Clear stale bootstrap cache files
-    @unlink(__DIR__ . '/../bootstrap/cache/packages.php');
-    @unlink(__DIR__ . '/../bootstrap/cache/services.php');
-    @unlink(__DIR__ . '/../bootstrap/cache/config.php');
-    @unlink(__DIR__ . '/../bootstrap/cache/routes-v7.php');
-
-    // 2. Setup writable /tmp storage
+    // 1. Setup writable /tmp storage
     $storagePath = '/tmp/storage';
     foreach ([
         $storagePath . '/framework/views',
@@ -25,7 +19,7 @@ try {
         }
     }
 
-    // 3. Setup SQLite database
+    // 2. Setup SQLite database
     $dbPath = '/tmp/database.sqlite';
     if (!file_exists($dbPath) && file_exists(__DIR__ . '/../database/database.sqlite')) {
         @copy(__DIR__ . '/../database/database.sqlite', $dbPath);
@@ -48,8 +42,17 @@ try {
     /** @var \Illuminate\Foundation\Application $app */
     $app = require_once __DIR__ . '/../bootstrap/app.php';
 
-    // 4. Force storage path to /tmp/storage
+    // 3. Force storage path to /tmp/storage
     $app->useStoragePath($storagePath);
+
+    // 4. Rebind PackageManifest to store packages.php inside writable /tmp/storage
+    $app->singleton(\Illuminate\Foundation\PackageManifest::class, function ($app) use ($storagePath) {
+        return new \Illuminate\Foundation\PackageManifest(
+            new \Illuminate\Filesystem\Filesystem,
+            $app->basePath(),
+            $storagePath . '/packages.php'
+        );
+    });
 
     // 5. Instantiate Kernel and run full framework bootstrapping
     /** @var Kernel $kernel */
