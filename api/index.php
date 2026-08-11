@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 try {
     define('LARAVEL_START', microtime(true));
 
-    // Clear stale Windows bootstrap cache files if present
+    // Clear stale bootstrap cache files if present
     @unlink(__DIR__ . '/../bootstrap/cache/packages.php');
     @unlink(__DIR__ . '/../bootstrap/cache/services.php');
     @unlink(__DIR__ . '/../bootstrap/cache/config.php');
@@ -47,6 +47,14 @@ try {
     $app = require_once __DIR__ . '/../bootstrap/app.php';
 
     $app->useStoragePath($storagePath);
+
+    // Register core view & livewire service providers for Vercel Serverless environment
+    if (!$app->bound('view')) {
+        $app->register(\Illuminate\View\ViewServiceProvider::class);
+    }
+    if (class_exists(\Livewire\LivewireServiceProvider::class) && !$app->bound('livewire')) {
+        $app->register(\Livewire\LivewireServiceProvider::class);
+    }
 
     $app->handleRequest(Request::capture());
 
