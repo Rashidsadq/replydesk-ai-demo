@@ -48,12 +48,13 @@ try {
 
     $app->useStoragePath($storagePath);
 
-    // Register core view & livewire service providers for Vercel Serverless environment
-    if (!$app->bound('view')) {
-        $app->register(\Illuminate\View\ViewServiceProvider::class);
-    }
-    if (class_exists(\Livewire\LivewireServiceProvider::class) && !$app->bound('livewire')) {
-        $app->register(\Livewire\LivewireServiceProvider::class);
+    // Register essential foundation service providers
+    $app->register(new \Illuminate\Filesystem\FilesystemServiceProvider($app));
+    $app->register(new \Illuminate\View\ViewServiceProvider($app));
+    $app->register(new \Illuminate\Session\SessionServiceProvider($app));
+
+    if (class_exists(\Livewire\LivewireServiceProvider::class)) {
+        $app->register(new \Livewire\LivewireServiceProvider($app));
     }
 
     $app->handleRequest(Request::capture());
