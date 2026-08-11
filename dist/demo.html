@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="h-full bg-slate-50 text-slate-900 antialiased" x-data="{ isRtl: false, sidebarOpen: false }">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Live WhatsApp Demo | ReplyDesk AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/build/assets/app-DX0ZJTo6.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        body { font-family: 'Instrument Sans', system-ui, sans-serif; }
+    </style>
+</head>
+<body class="h-full font-sans antialiased overflow-x-hidden selection:bg-purple-500 selection:text-white" :dir="isRtl ? 'rtl' : 'ltr'">
+    <div class="min-h-screen bg-slate-50 flex flex-col md:flex-row">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="w-full md:w-64 bg-slate-900 text-slate-300 flex flex-col shrink-0 border-r border-slate-800">
+            <div class="h-16 px-4 flex items-center justify-between border-b border-slate-800">
+                <a href="/index.html" class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-xl bg-purple-600 flex items-center justify-center text-white font-bold shadow-md shadow-purple-500/20">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-4l-4 4z"></path>
+                        </svg>
+                    </div>
+                    <span class="text-base font-bold text-white tracking-tight">ReplyDesk <span class="text-purple-400">AI</span></span>
+                </a>
+            </div>
+
+            <nav class="flex-1 p-3 space-y-1 overflow-y-auto text-xs font-medium">
+                <a href="/dashboard.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 text-slate-300">
+                    <span>📊</span> <span x-text="isRtl ? 'لوحة التحكم' : 'Sales Dashboard'"></span>
+                </a>
+                <a href="/demo.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition bg-purple-600 text-white font-bold shadow-md">
+                    <span>💬</span> <span x-text="isRtl ? 'العرض المباشر (واتساب)' : 'Live WhatsApp Demo'"></span>
+                </a>
+                <a href="/conversations.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 text-slate-300">
+                    <span>📥</span> <span x-text="isRtl ? 'صندوق المحادثات' : 'Conversations Inbox'"></span>
+                </a>
+                <a href="/customers.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 text-slate-300">
+                    <span>👥</span> <span x-text="isRtl ? 'دليل العملاء' : 'Customers Directory'"></span>
+                </a>
+                <a href="/appointments.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 text-slate-300">
+                    <span>📅</span> <span x-text="isRtl ? 'جدول المواعيد' : 'Appointments Schedule'"></span>
+                </a>
+                <a href="/services.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 text-slate-300">
+                    <span>💈</span> <span x-text="isRtl ? 'قائمة الخدمات' : 'Services & Pricing'"></span>
+                </a>
+                <a href="/staff.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 text-slate-300">
+                    <span>👨‍💼</span> <span x-text="isRtl ? 'طاقم الحلاقين' : 'Barbers & Staff'"></span>
+                </a>
+                <a href="/ai-settings.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 text-slate-300">
+                    <span>🤖</span> <span x-text="isRtl ? 'إعدادات الذكاء الاصطناعي' : 'AI Receptionist Rules'"></span>
+                </a>
+                <a href="/settings.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 text-slate-300">
+                    <span>⚙️</span> <span x-text="isRtl ? 'إعدادات الصالون' : 'Business Settings'"></span>
+                </a>
+            </nav>
+
+            <div class="p-3 border-t border-slate-800">
+                <div class="p-3 rounded-xl bg-slate-950/80 border border-slate-800/80 flex items-center justify-between">
+                    <div>
+                        <div class="text-xs font-bold text-white">Elite Barber Dubai</div>
+                        <div class="text-[10px] text-purple-400">Dubai Marina • AED</div>
+                    </div>
+                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Workspace Area -->
+        <div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+            <!-- Topbar Header -->
+            <header class="h-16 bg-white border-b border-slate-200/80 px-4 sm:px-6 flex items-center justify-between shrink-0 shadow-sm">
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Demo Store:</span>
+                    <span class="text-xs font-extrabold text-slate-800 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Elite Barber Dubai Marina</span>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <!-- Language Switcher Toggle -->
+                    <button @click="isRtl = !isRtl" class="text-xs font-extrabold px-3 py-1.5 rounded-xl bg-purple-50 text-purple-700 hover:bg-purple-100 border border-purple-200 transition">
+                        <span x-text="isRtl ? 'English (LTR)' : 'العربية (RTL)'"></span>
+                    </button>
+                    <a href="/demo.html" class="px-3.5 py-1.5 text-xs font-bold text-white bg-purple-600 hover:bg-purple-500 rounded-xl shadow-md transition">
+                        <span x-text="isRtl ? 'العرض المباشر' : 'Live WhatsApp Demo'"></span>
+                    </a>
+                </div>
+            </header>
+
+            <main class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
+                
+<div x-data="{ 
+        isPlaying: false, 
+        isTyping: false, 
+        currentStep: 1,
+        
+        async runFullDemo() {
+            if (this.isPlaying) return;
+            this.isPlaying = true;
+            this.currentStep = 1;
+            
+            this.isTyping = true;
+            await new Promise(r => setTimeout(r, 1000));
+            this.isTyping = false;
+            
+            this.currentStep = 2;
+            this.isTyping = true;
+            await new Promise(r => setTimeout(r, 1200));
+            this.isTyping = false;
+
+            this.currentStep = 3;
+            this.isPlaying = false;
+        }
+    }" class="flex flex-col gap-4">
+
+    <!-- Top Guided Demo Header -->
+    <div class="bg-gradient-to-r from-slate-900 via-purple-950 to-slate-900 text-white rounded-2xl p-4 sm:p-5 border border-purple-800/40 shadow-xl space-y-4">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-purple-900/60 pb-3">
+            <div class="flex items-center gap-3">
+                <span class="px-2.5 py-1 rounded-lg text-xs font-extrabold bg-purple-600 text-white tracking-wider uppercase font-mono shadow-md">LIVE DEMO</span>
+                <div>
+                    <h2 class="text-base font-extrabold text-white" x-text="isRtl ? 'ReplyDesk AI — مسار موظف الاستقبال الآلي' : 'ReplyDesk AI WhatsApp Receptionist Flow'"></h2>
+                    <p class="text-xs text-purple-200" x-text="isRtl ? 'شاهد كيف يجيب موظف الذكاء الاصطناعي على استفسارات العملاء ويتحقق من المواعيد ويحجز تلقائياً.' : 'Watch the AI answer customer inquiries, verify slot availability, and book appointments automatically.'"></p>
+                </div>
+            </div>
+            <button @click="runFullDemo()" :disabled="isPlaying" class="px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-extrabold shadow-lg flex items-center gap-2">
+                <span x-text="isPlaying ? 'Playing Live Demo...' : '▶ Run Guided Auto Demo'"></span>
+            </button>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+            <div class="p-3 rounded-xl border flex items-center gap-3" :class="currentStep == 1 ? 'bg-purple-900/80 border-purple-500 text-white' : 'bg-slate-900/60 border-slate-800 text-slate-400'">
+                <div class="w-7 h-7 rounded-lg bg-purple-600 text-white flex items-center justify-center font-bold">1</div>
+                <div><div class="font-bold">Step 1 — Customer asks</div><div class="text-[10px] opacity-80">"How much is a haircut?"</div></div>
+            </div>
+            <div class="p-3 rounded-xl border flex items-center gap-3" :class="currentStep == 2 ? 'bg-purple-900/80 border-purple-500 text-white' : 'bg-slate-900/60 border-slate-800 text-slate-400'">
+                <div class="w-7 h-7 rounded-lg bg-purple-600 text-white flex items-center justify-center font-bold">2</div>
+                <div><div class="font-bold">Step 2 — AI responds</div><div class="text-[10px] opacity-80">Pricing & checks slots</div></div>
+            </div>
+            <div class="p-3 rounded-xl border flex items-center gap-3" :class="currentStep >= 3 ? 'bg-emerald-950/90 border-emerald-500 text-emerald-200' : 'bg-slate-900/60 border-slate-800 text-slate-400'">
+                <div class="w-7 h-7 rounded-lg bg-emerald-500 text-white flex items-center justify-center font-bold">✓</div>
+                <div><div class="font-bold">Step 3 — Appointment booked</div><div class="text-[10px] opacity-80">Synced with Dashboard</div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Area -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col h-[550px]">
+        <div class="h-16 px-4 bg-slate-900 text-white flex items-center justify-between shrink-0">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-full bg-purple-600 text-white flex items-center justify-center font-bold text-sm">EB</div>
+                <div>
+                    <div class="text-sm font-bold text-white">Elite Barber Dubai</div>
+                    <div class="text-[11px] text-emerald-400">● ReplyDesk AI Receptionist Active</div>
+                </div>
+            </div>
+            <a href="/dashboard.html?highlight=latest" class="text-xs text-purple-200 bg-purple-900/60 px-3 py-1.5 rounded-xl border border-purple-700 font-bold">View Dashboard →</a>
+        </div>
+
+        <div class="flex-1 p-4 overflow-y-auto space-y-4 bg-slate-50">
+            <!-- Messages -->
+            <div class="flex justify-start">
+                <div class="bg-white text-slate-800 rounded-2xl p-3.5 max-w-[80%] shadow-sm border border-slate-200 text-xs">
+                    <div class="font-bold text-slate-400 text-[10px] mb-1" x-text="isRtl ? 'طارق خليل' : 'Tariq Khalil'"></div>
+                    <span x-text="isRtl ? 'مرحباً، كم سعر قص الشعر لديكم؟' : 'Hi 👋 How much is a haircut?'"></span>
+                </div>
+            </div>
+
+            <div x-show="currentStep >= 2" class="flex justify-end">
+                <div class="bg-purple-900 text-white rounded-2xl p-4 max-w-[85%] shadow-lg border border-purple-700 text-xs space-y-2">
+                    <div class="text-[10px] text-purple-200 font-bold border-b border-purple-800 pb-1">⚡ ReplyDesk AI Receptionist</div>
+                    <p x-text="isRtl ? 'أهلاً بك! سعر قص الشعر 80 درهم واستغرقه 30 دقيقة. لدينا موعد متاح اليوم الساعة 6:00 مساءً مع أحمد حسن. هل تحجز هذا الموعد؟' : 'Hi! Our haircut is AED 80 (30 mins). We have an open slot today at 6:00 PM with Ahmed Hassan. Would you like to book it?'"></p>
+                </div>
+            </div>
+
+            <div x-show="currentStep >= 3" class="flex justify-end">
+                <div class="bg-purple-900 text-white rounded-2xl p-4 max-w-[85%] shadow-lg border border-purple-700 text-xs space-y-3">
+                    <div class="text-[10px] text-purple-200 font-bold border-b border-purple-800 pb-1">⚡ ReplyDesk AI Receptionist</div>
+                    <p x-text="isRtl ? 'ممتاز! تم حجز موعد قص الشعر الخاص بك بنجاح! ✅' : 'Awesome! Your haircut appointment is confirmed! ✅'"></p>
+                    
+                    <!-- Confirmation Card -->
+                    <div class="bg-slate-900 rounded-2xl p-4 border-2 border-emerald-500 text-left space-y-3">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                            <span class="text-xs font-extrabold text-emerald-400 uppercase">Appointment Confirmed</span>
+                            <span class="text-[10px] font-mono bg-slate-950 px-2 py-0.5 rounded text-emerald-300">#BK-8492</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 text-xs bg-slate-950 p-2.5 rounded-xl">
+                            <div><span class="text-slate-400 text-[10px] block font-bold">SERVICE</span><span class="font-bold text-white">Haircut</span></div>
+                            <div><span class="text-slate-400 text-[10px] block font-bold">STAFF</span><span class="font-bold text-white">Ahmed Hassan</span></div>
+                            <div><span class="text-slate-400 text-[10px] block font-bold">TIME</span><span class="font-bold text-emerald-400">Today, 6:00 PM</span></div>
+                            <div><span class="text-slate-400 text-[10px] block font-bold">PRICE</span><span class="font-bold text-white">80 AED</span></div>
+                        </div>
+                        <div class="flex justify-end pt-1">
+                            <a href="/dashboard.html?highlight=latest" class="px-4 py-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs rounded-xl shadow transition">View in Dashboard →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div x-show="isTyping" class="flex justify-end">
+                <div class="bg-purple-900/80 text-white rounded-2xl px-4 py-2 text-xs flex items-center gap-2">
+                    <span>ReplyDesk AI is typing...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

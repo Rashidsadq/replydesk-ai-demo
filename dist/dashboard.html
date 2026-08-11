@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="h-full bg-slate-50 text-slate-900 antialiased" x-data="{ isRtl: false, sidebarOpen: false }">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sales Dashboard | ReplyDesk AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/build/assets/app-DX0ZJTo6.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        body { font-family: 'Instrument Sans', system-ui, sans-serif; }
+    </style>
+</head>
+<body class="h-full font-sans antialiased overflow-x-hidden selection:bg-purple-500 selection:text-white" :dir="isRtl ? 'rtl' : 'ltr'">
+    <div class="min-h-screen bg-slate-50 flex flex-col md:flex-row">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="w-full md:w-64 bg-slate-900 text-slate-300 flex flex-col shrink-0 border-r border-slate-800">
+            <div class="h-16 px-4 flex items-center justify-between border-b border-slate-800">
+                <a href="/index.html" class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-xl bg-purple-600 flex items-center justify-center text-white font-bold shadow-md shadow-purple-500/20">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-4l-4 4z"></path>
+                        </svg>
+                    </div>
+                    <span class="text-base font-bold text-white tracking-tight">ReplyDesk <span class="text-purple-400">AI</span></span>
+                </a>
+            </div>
+
+            <nav class="flex-1 p-3 space-y-1 overflow-y-auto text-xs font-medium">
+                <a href="/dashboard.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition bg-purple-600 text-white font-bold shadow-md">
+                    <span>📊</span> <span x-text="isRtl ? 'لوحة التحكم' : 'Sales Dashboard'"></span>
+                </a>
+                <a href="/demo.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 text-slate-300">
+                    <span>💬</span> <span x-text="isRtl ? 'العرض المباشر (واتساب)' : 'Live WhatsApp Demo'"></span>
+                </a>
+                <a href="/conversations.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 text-slate-300">
+                    <span>📥</span> <span x-text="isRtl ? 'صندوق المحادثات' : 'Conversations Inbox'"></span>
+                </a>
+                <a href="/customers.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 text-slate-300">
+                    <span>👥</span> <span x-text="isRtl ? 'دليل العملاء' : 'Customers Directory'"></span>
+                </a>
+                <a href="/appointments.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 text-slate-300">
+                    <span>📅</span> <span x-text="isRtl ? 'جدول المواعيد' : 'Appointments Schedule'"></span>
+                </a>
+                <a href="/services.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 text-slate-300">
+                    <span>💈</span> <span x-text="isRtl ? 'قائمة الخدمات' : 'Services & Pricing'"></span>
+                </a>
+                <a href="/staff.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 text-slate-300">
+                    <span>👨‍💼</span> <span x-text="isRtl ? 'طاقم الحلاقين' : 'Barbers & Staff'"></span>
+                </a>
+                <a href="/ai-settings.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 text-slate-300">
+                    <span>🤖</span> <span x-text="isRtl ? 'إعدادات الذكاء الاصطناعي' : 'AI Receptionist Rules'"></span>
+                </a>
+                <a href="/settings.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 text-slate-300">
+                    <span>⚙️</span> <span x-text="isRtl ? 'إعدادات الصالون' : 'Business Settings'"></span>
+                </a>
+            </nav>
+
+            <div class="p-3 border-t border-slate-800">
+                <div class="p-3 rounded-xl bg-slate-950/80 border border-slate-800/80 flex items-center justify-between">
+                    <div>
+                        <div class="text-xs font-bold text-white">Elite Barber Dubai</div>
+                        <div class="text-[10px] text-purple-400">Dubai Marina • AED</div>
+                    </div>
+                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Workspace Area -->
+        <div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+            <!-- Topbar Header -->
+            <header class="h-16 bg-white border-b border-slate-200/80 px-4 sm:px-6 flex items-center justify-between shrink-0 shadow-sm">
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Demo Store:</span>
+                    <span class="text-xs font-extrabold text-slate-800 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Elite Barber Dubai Marina</span>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <!-- Language Switcher Toggle -->
+                    <button @click="isRtl = !isRtl" class="text-xs font-extrabold px-3 py-1.5 rounded-xl bg-purple-50 text-purple-700 hover:bg-purple-100 border border-purple-200 transition">
+                        <span x-text="isRtl ? 'English (LTR)' : 'العربية (RTL)'"></span>
+                    </button>
+                    <a href="/demo.html" class="px-3.5 py-1.5 text-xs font-bold text-white bg-purple-600 hover:bg-purple-500 rounded-xl shadow-md transition">
+                        <span x-text="isRtl ? 'العرض المباشر' : 'Live WhatsApp Demo'"></span>
+                    </a>
+                </div>
+            </header>
+
+            <main class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
+                
+<div class="space-y-6" x-data="{ highlighted: new URLSearchParams(window.location.search).get('highlight') === 'latest' }">
+    
+    <!-- Banner if highlighted -->
+    <div x-show="highlighted" class="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-800 flex items-center justify-between shadow-sm">
+        <div class="flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-emerald-500 text-slate-950 font-black flex items-center justify-center">✓</span>
+            <div>
+                <div class="text-xs font-extrabold uppercase tracking-wider text-emerald-900" x-text="isRtl ? 'تم استقبال الحجز الجديد من موظف الواتساب' : 'New Appointment Auto-Booked via WhatsApp AI'"></div>
+                <div class="text-xs text-emerald-700" x-text="isRtl ? 'حجز قص شعر #BK-8492 - طارق خليل - 6:00 مساءً مع أحمد حسن' : '#BK-8492 Haircut - Tariq Khalil - 6:00 PM with Ahmed Hassan'"></div>
+            </div>
+        </div>
+        <span class="text-xs font-mono font-bold bg-emerald-200/60 px-3 py-1 rounded-xl text-emerald-900">+80 AED</span>
+    </div>
+
+    <!-- 4 Priority Sales KPI Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-sm space-y-2">
+            <div class="text-xs font-bold text-slate-400 uppercase tracking-wider" x-text="isRtl ? 'المواعيد المحجوزة بالذكاء الاصطناعي' : 'Bookings generated by AI'"></div>
+            <div class="text-3xl font-extrabold text-slate-900">9</div>
+            <div class="text-xs text-emerald-600 font-semibold flex items-center gap-1">
+                <span>+AED 920 revenue generated</span>
+            </div>
+        </div>
+        <div class="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-sm space-y-2">
+            <div class="text-xs font-bold text-slate-400 uppercase tracking-wider" x-text="isRtl ? 'العملاء المحتملون الجدد' : 'New leadsCaptured'"></div>
+            <div class="text-3xl font-extrabold text-slate-900">17</div>
+            <div class="text-xs text-purple-600 font-semibold">+35% vs last week</div>
+        </div>
+        <div class="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-sm space-y-2">
+            <div class="text-xs font-bold text-slate-400 uppercase tracking-wider" x-text="isRtl ? 'محادثات الذكاء الاصطناعي' : 'AI Conversations'"></div>
+            <div class="text-3xl font-extrabold text-purple-600">48</div>
+            <div class="text-xs text-slate-500">24/7 automated coverage</div>
+        </div>
+        <div class="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-sm space-y-2">
+            <div class="text-xs font-bold text-slate-400 uppercase tracking-wider" x-text="isRtl ? 'مواعيد اليوم' : 'Appointments today'"></div>
+            <div class="text-3xl font-extrabold text-slate-900">12</div>
+            <div class="text-xs text-emerald-600 font-semibold">9 booked by AI</div>
+        </div>
+    </div>
+
+    <!-- Sales Conversion Funnel & Activity Stream -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Sales Funnel Visualization -->
+        <div class="lg:col-span-7 bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm space-y-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="text-base font-extrabold text-slate-900" x-text="isRtl ? 'مسار التحويل المباشر للواتساب' : 'WhatsApp Conversion Funnel'"></h3>
+                    <p class="text-xs text-slate-500">Conversations → Leads → Bookings</p>
+                </div>
+                <div class="px-3 py-1.5 rounded-xl bg-purple-50 border border-purple-200 text-purple-700 text-xs font-extrabold">
+                    52.9% Conversion Rate
+                </div>
+            </div>
+
+            <!-- Funnel Stages -->
+            <div class="space-y-4">
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between">
+                    <div>
+                        <div class="text-xs font-bold text-slate-500">STAGE 1 — INBOUND CHATS</div>
+                        <div class="text-lg font-extrabold text-slate-900">48 Conversations</div>
+                    </div>
+                    <span class="text-xs font-bold text-slate-400">100%</span>
+                </div>
+                <div class="p-4 rounded-xl bg-purple-50/60 border border-purple-200 flex items-center justify-between">
+                    <div>
+                        <div class="text-xs font-bold text-purple-700">STAGE 2 — QUALIFIED LEADS</div>
+                        <div class="text-lg font-extrabold text-purple-900">17 Leads</div>
+                    </div>
+                    <span class="text-xs font-bold text-purple-700">35.4%</span>
+                </div>
+                <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-300 flex items-center justify-between">
+                    <div>
+                        <div class="text-xs font-bold text-emerald-700">STAGE 3 — BOOKED APPOINTMENTS</div>
+                        <div class="text-lg font-extrabold text-emerald-950">9 Bookings</div>
+                    </div>
+                    <span class="text-xs font-bold text-emerald-700 font-mono">+920 AED</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Activity Stream -->
+        <div class="lg:col-span-5 bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm space-y-4">
+            <h3 class="text-base font-extrabold text-slate-900" x-text="isRtl ? 'نشاط الذكاء الاصطناعي المباشر' : 'AI Activity Stream'"></h3>
+            <div class="space-y-3 text-xs">
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 flex items-start gap-3">
+                    <span class="text-emerald-600 font-bold">✓</span>
+                    <div>
+                        <div class="font-bold text-emerald-950">Booked appointment (#BK-8492)</div>
+                        <div class="text-[11px] text-emerald-700">Tariq Khalil • Haircut 6:00 PM with Ahmed</div>
+                    </div>
+                </div>
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-start gap-3">
+                    <span class="text-purple-600 font-bold">✓</span>
+                    <div>
+                        <div class="font-bold text-slate-800">Answered pricing question</div>
+                        <div class="text-[11px] text-slate-500">Haircut 80 AED & Beard Trim 40 AED</div>
+                    </div>
+                </div>
+                <div class="p-3 rounded-xl bg-amber-50 border border-amber-200 flex items-start gap-3">
+                    <span class="text-amber-600 font-bold">⚠</span>
+                    <div>
+                        <div class="font-bold text-amber-950">Transferred conversation to staff</div>
+                        <div class="text-[11px] text-amber-700">Sarah Ahmed requested custom hair dye package</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Today's Agenda Schedule Table -->
+    <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden p-6 space-y-4">
+        <h3 class="text-base font-extrabold text-slate-900" x-text="isRtl ? 'جدول المواعيد اليوم' : 'Today's Salon Schedule'"></h3>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+                <thead class="bg-slate-50 text-slate-500 uppercase font-bold text-[10px] border-b border-slate-200">
+                    <tr>
+                        <th class="p-3">Time</th>
+                        <th class="p-3">Customer</th>
+                        <th class="p-3">Service</th>
+                        <th class="p-3">Barber</th>
+                        <th class="p-3">Source</th>
+                        <th class="p-3">Price</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    <tr :class="highlighted ? 'bg-emerald-50/90 ring-2 ring-emerald-500/60 font-bold' : ''" class="transition">
+                        <td class="p-3 text-emerald-700 font-mono">6:00 PM</td>
+                        <td class="p-3 font-bold text-slate-800">Tariq Khalil (+971 50 882 1928)</td>
+                        <td class="p-3">Haircut (30 mins)</td>
+                        <td class="p-3">Ahmed Hassan</td>
+                        <td class="p-3"><span class="px-2 py-0.5 bg-purple-100 text-purple-700 rounded-md font-bold">🤖 ReplyDesk AI</span></td>
+                        <td class="p-3 font-mono font-bold text-slate-900">80 AED</td>
+                    </tr>
+                    <tr>
+                        <td class="p-3 text-slate-500 font-mono">6:30 PM</td>
+                        <td class="p-3 font-bold text-slate-800">Youssef Mansoor</td>
+                        <td class="p-3">Beard Trim</td>
+                        <td class="p-3">Omar Khalid</td>
+                        <td class="p-3"><span class="px-2 py-0.5 bg-purple-100 text-purple-700 rounded-md font-bold">🤖 ReplyDesk AI</span></td>
+                        <td class="p-3 font-mono font-bold text-slate-900">40 AED</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

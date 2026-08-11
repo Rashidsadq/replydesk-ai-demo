@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="h-full bg-slate-50 text-slate-900 antialiased" x-data="{ isRtl: false, sidebarOpen: false }">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI Receptionist Rules | ReplyDesk AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/build/assets/app-DX0ZJTo6.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        body { font-family: 'Instrument Sans', system-ui, sans-serif; }
+    </style>
+</head>
+<body class="h-full font-sans antialiased overflow-x-hidden selection:bg-purple-500 selection:text-white" :dir="isRtl ? 'rtl' : 'ltr'">
+    <div class="min-h-screen bg-slate-50 flex flex-col md:flex-row">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="w-full md:w-64 bg-slate-900 text-slate-300 flex flex-col shrink-0 border-r border-slate-800">
+            <div class="h-16 px-4 flex items-center justify-between border-b border-slate-800">
+                <a href="/index.html" class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-xl bg-purple-600 flex items-center justify-center text-white font-bold shadow-md shadow-purple-500/20">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-4l-4 4z"></path>
+                        </svg>
+                    </div>
+                    <span class="text-base font-bold text-white tracking-tight">ReplyDesk <span class="text-purple-400">AI</span></span>
+                </a>
+            </div>
+
+            <nav class="flex-1 p-3 space-y-1 overflow-y-auto text-xs font-medium">
+                <a href="/dashboard.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 text-slate-300">
+                    <span>📊</span> <span x-text="isRtl ? 'لوحة التحكم' : 'Sales Dashboard'"></span>
+                </a>
+                <a href="/demo.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 text-slate-300">
+                    <span>💬</span> <span x-text="isRtl ? 'العرض المباشر (واتساب)' : 'Live WhatsApp Demo'"></span>
+                </a>
+                <a href="/conversations.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 text-slate-300">
+                    <span>📥</span> <span x-text="isRtl ? 'صندوق المحادثات' : 'Conversations Inbox'"></span>
+                </a>
+                <a href="/customers.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 text-slate-300">
+                    <span>👥</span> <span x-text="isRtl ? 'دليل العملاء' : 'Customers Directory'"></span>
+                </a>
+                <a href="/appointments.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 text-slate-300">
+                    <span>📅</span> <span x-text="isRtl ? 'جدول المواعيد' : 'Appointments Schedule'"></span>
+                </a>
+                <a href="/services.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 text-slate-300">
+                    <span>💈</span> <span x-text="isRtl ? 'قائمة الخدمات' : 'Services & Pricing'"></span>
+                </a>
+                <a href="/staff.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 text-slate-300">
+                    <span>👨‍💼</span> <span x-text="isRtl ? 'طاقم الحلاقين' : 'Barbers & Staff'"></span>
+                </a>
+                <a href="/ai-settings.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition bg-purple-600 text-white font-bold shadow-md">
+                    <span>🤖</span> <span x-text="isRtl ? 'إعدادات الذكاء الاصطناعي' : 'AI Receptionist Rules'"></span>
+                </a>
+                <a href="/settings.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 text-slate-300">
+                    <span>⚙️</span> <span x-text="isRtl ? 'إعدادات الصالون' : 'Business Settings'"></span>
+                </a>
+            </nav>
+
+            <div class="p-3 border-t border-slate-800">
+                <div class="p-3 rounded-xl bg-slate-950/80 border border-slate-800/80 flex items-center justify-between">
+                    <div>
+                        <div class="text-xs font-bold text-white">Elite Barber Dubai</div>
+                        <div class="text-[10px] text-purple-400">Dubai Marina • AED</div>
+                    </div>
+                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Workspace Area -->
+        <div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+            <!-- Topbar Header -->
+            <header class="h-16 bg-white border-b border-slate-200/80 px-4 sm:px-6 flex items-center justify-between shrink-0 shadow-sm">
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Demo Store:</span>
+                    <span class="text-xs font-extrabold text-slate-800 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">Elite Barber Dubai Marina</span>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <!-- Language Switcher Toggle -->
+                    <button @click="isRtl = !isRtl" class="text-xs font-extrabold px-3 py-1.5 rounded-xl bg-purple-50 text-purple-700 hover:bg-purple-100 border border-purple-200 transition">
+                        <span x-text="isRtl ? 'English (LTR)' : 'العربية (RTL)'"></span>
+                    </button>
+                    <a href="/demo.html" class="px-3.5 py-1.5 text-xs font-bold text-white bg-purple-600 hover:bg-purple-500 rounded-xl shadow-md transition">
+                        <span x-text="isRtl ? 'العرض المباشر' : 'Live WhatsApp Demo'"></span>
+                    </a>
+                </div>
+            </header>
+
+            <main class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
+                
+<div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-4">
+    <h2 class="text-lg font-bold text-slate-900">AI Receptionist Rules</h2>
+    <p class="text-xs text-slate-500">Elite Barber Dubai Marina • AED</p>
+    <div class="p-8 text-center text-slate-400 text-xs bg-slate-50 rounded-xl border border-slate-200 font-medium">
+        AI Receptionist Rules Management Panel Ready for Presentation.
+    </div>
+</div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

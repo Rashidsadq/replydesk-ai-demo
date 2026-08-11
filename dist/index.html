@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="h-full bg-slate-950 text-white antialiased" x-data="{ isRtl: false }">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ReplyDesk AI — Your AI Receptionist for WhatsApp | Dubai Salons & Barbers</title>
+    <link rel="stylesheet" href="/build/assets/app-DX0ZJTo6.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="h-full bg-slate-950 font-sans antialiased" :dir="isRtl ? 'rtl' : 'ltr'">
+    <div class="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
+        <header class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between z-20">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-purple-600 to-indigo-500 flex items-center justify-center text-white font-bold shadow-lg shadow-purple-500/30">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-4l-4 4z"></path>
+                    </svg>
+                </div>
+                <span class="text-xl font-bold tracking-tight text-white">ReplyDesk <span class="text-purple-400">AI</span></span>
+            </div>
+            <div class="flex items-center gap-4">
+                <button @click="isRtl = !isRtl" class="text-xs font-semibold text-slate-300 hover:text-white px-3 py-1.5 rounded-xl border border-slate-800">
+                    <span x-text="isRtl ? 'English' : 'العربية (RTL)'"></span>
+                </button>
+                <a href="/dashboard.html" class="text-sm font-medium text-slate-300 hover:text-white transition hidden sm:inline-block">Dashboard</a>
+                <a href="/demo.html" class="px-4 py-2 text-sm font-semibold text-white bg-purple-600 hover:bg-purple-500 rounded-xl shadow-lg transition">Try Live Demo</a>
+            </div>
+        </header>
+
+        <section class="relative pt-12 pb-20 md:pt-20 md:pb-32 overflow-hidden text-center max-w-7xl mx-auto px-4">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900 border border-slate-800 text-xs text-purple-300 mb-6">
+                <span>Built exclusively for Dubai Salons & Barbers</span>
+            </div>
+            <h1 class="text-4xl sm:text-6xl font-extrabold text-white leading-tight max-w-4xl mx-auto" x-text="isRtl ? 'موظف الاستقبال الذكي الخاص بك على واتساب' : 'Your AI receptionist for WhatsApp.'"></h1>
+            <p class="mt-6 text-lg text-slate-400 max-w-2xl mx-auto" x-text="isRtl ? 'الرد الفوري على العملاء، التقاط العملاء المحتملين، وحجز المواعيد تلقائياً 24/7.' : 'Answer customers, capture leads, and book appointments automatically around the clock.'"></p>
+            <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+                <a href="/demo.html" class="px-8 py-4 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded-2xl shadow-xl transition text-base">Try Live Demo →</a>
+                <a href="/dashboard.html" class="px-8 py-4 bg-slate-900 hover:bg-slate-800 text-slate-200 font-semibold rounded-2xl border border-slate-800 text-base">View Business Dashboard</a>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
