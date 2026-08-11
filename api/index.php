@@ -27,7 +27,7 @@ if (!file_exists($dbPath) && file_exists(__DIR__ . '/../database/database.sqlite
     @touch($dbPath);
 }
 
-// 3. Populate $_ENV and $_SERVER for Vercel serverless environment
+// 3. Set environment variables
 $envVars = [
     'APP_ENV' => 'production',
     'APP_DEBUG' => 'true',
@@ -52,7 +52,7 @@ require __DIR__ . '/../vendor/autoload.php';
 /** @var \Illuminate\Foundation\Application $app */
 $app = require_once __DIR__ . '/../bootstrap/app.php';
 
-// 4. Force all storage and bootstrap manifest paths into writable /tmp/storage
+// 4. Force storage path & bootstrap path to /tmp/storage
 $app->useStoragePath($storagePath);
 $app->useBootstrapPath($storagePath);
 
@@ -63,24 +63,19 @@ $app->instance('request', $request);
 /** @var Kernel $kernel */
 $kernel = $app->make(Kernel::class);
 
-// 6. Set explicit fallback configs before handling request
+// 6. Bootstrap framework FIRST to bind config, router, views, sessions
+$kernel->bootstrap();
+
+// 7. Set runtime configuration overrides after bootstrapping
 config([
     'session.driver' => 'cookie',
-    'session.lifetime' => 120,
-    'session.expire_on_close' => false,
-    'session.encrypt' => false,
-    'session.path' => '/',
-    'session.domain' => null,
-    'session.secure' => true,
-    'session.http_only' => true,
-    'session.same_site' => 'lax',
     'cache.default' => 'array',
     'logging.default' => 'stderr',
     'database.default' => 'sqlite',
     'database.connections.sqlite.database' => $dbPath,
 ]);
 
-// 7. Handle Request
+// 8. Handle HTTP Request & Terminate
 $response = $kernel->handle($request);
 $response->send();
 $kernel->terminate($request, $response);
