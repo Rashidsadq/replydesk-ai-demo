@@ -42,24 +42,20 @@ try {
     /** @var \Illuminate\Foundation\Application $app */
     $app = require_once __DIR__ . '/../bootstrap/app.php';
 
-    // 3. Force storage path to /tmp/storage
+    // 3. Force all storage and bootstrap manifest paths into writable /tmp/storage
     $app->useStoragePath($storagePath);
+    $app->setCachedServicesPath($storagePath . '/services.php');
+    $app->setCachedPackagesPath($storagePath . '/packages.php');
+    $app->setCachedRoutesPath($storagePath . '/routes.php');
+    $app->setCachedConfigPath($storagePath . '/config.php');
+    $app->setCachedEventsPath($storagePath . '/events.php');
 
-    // 4. Rebind PackageManifest to store packages.php inside writable /tmp/storage
-    $app->singleton(\Illuminate\Foundation\PackageManifest::class, function ($app) use ($storagePath) {
-        return new \Illuminate\Foundation\PackageManifest(
-            new \Illuminate\Filesystem\Filesystem,
-            $app->basePath(),
-            $storagePath . '/packages.php'
-        );
-    });
-
-    // 5. Instantiate Kernel and run full framework bootstrapping
+    // 4. Instantiate Kernel and run full framework bootstrapping
     /** @var Kernel $kernel */
     $kernel = $app->make(Kernel::class);
     $kernel->bootstrap();
 
-    // 6. Handle HTTP Request
+    // 5. Handle HTTP Request
     $request = Request::capture();
     $response = $kernel->handle($request);
     $response->send();
