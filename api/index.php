@@ -1,13 +1,17 @@
 <?php
 
-// Prepare writable /tmp directory structure for Vercel Serverless Lambda
-$tmpDir = '/tmp';
+use Illuminate\Contracts\Http\Kernel;
+use Illuminate\Http\Request;
 
+define('LARAVEL_START', microtime(true));
+
+// 1. Prepare writable /tmp storage directory structure for Vercel Lambda
+$storagePath = '/tmp/storage';
 $directories = [
-    '/tmp/storage/framework/views',
-    '/tmp/storage/framework/sessions',
-    '/tmp/storage/framework/cache',
-    '/tmp/storage/logs',
+    $storagePath . '/framework/views',
+    $storagePath . '/framework/sessions',
+    $storagePath . '/framework/cache/data',
+    $storagePath . '/logs',
 ];
 
 foreach ($directories as $dir) {
@@ -16,21 +20,41 @@ foreach ($directories as $dir) {
     }
 }
 
-// Set environment variables for Vercel serverless execution
+// 2. Setup SQLite database in /tmp
+$dbPath = '/tmp/database.sqlite';
+if (!file_exists($dbPath) && file_exists(__DIR__ . '/../database/database.sqlite')) {
+    @copy(__DIR__ . '/../database/database.sqlite', $dbPath);
+} elseif (!file_exists($dbPath)) {
+    @touch($dbPath);
+}
+
+// 3. Set environment variables
 putenv('APP_ENV=production');
 putenv('APP_DEBUG=true');
 putenv('APP_KEY=base64:k+GJlpYlO1Urpj9xPVTGF6PA/yvTLqQNnv53LnB3o64=');
-putenv('VIEW_COMPILED_PATH=/tmp/storage/framework/views');
+putenv('DB_CONNECTION=sqlite');
+putenv('DB_DATABASE=' . $dbPath);
 putenv('SESSION_DRIVER=cookie');
 putenv('CACHE_STORE=array');
 putenv('LOG_CHANNEL=stderr');
-putenv('DB_CONNECTION=sqlite');
-putenv('DB_DATABASE=/tmp/database.sqlite');
+putenv('VIEW_COMPILED_PATH=' . $storagePath . '/framework/views');
 
-// Create temporary SQLite database if not exists
-if (!file_exists('/tmp/database.sqlite')) {
-    @copy(__DIR__ . '/../database/database.sqlite', '/tmp/database.sqlite');
-}
+// 4. Load Composer Autoloader
+require __DIR__ . '/../vendor/autoload.php';
 
-// Forward request to Laravel public index.php
-require __DIR__ . '/../public/index.php';
+// 5. Bootstrap Laravel Application
+$app = require_once __DIR__ . '/../bootstrap/app.php';
+
+// 6. Force Laravel to use /tmp/storage instead of read-only /var/task/user/storage
+$app->useStoragePath($storagePath);
+
+// 7. Handle Request & Send Response
+$kernel = $app->make(Kernel::class);
+
+$response = $kernel->handle(
+    $request = Request::capture()
+);
+
+$response->send();
+
+$kernel->terminate($request, $response);
