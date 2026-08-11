@@ -1,28 +1,19 @@
 {
   "version": 2,
-  "framework": null,
-  "outputDirectory": "public",
-  "buildCommand": "npm run build",
-  "env": {
-    "PHP_VERSION": "8.3",
-    "APP_ENV": "production",
-    "APP_DEBUG": "true",
-    "APP_KEY": "base64:k+GJlpYlO1Urpj9xPVTGF6PA/yvTLqQNnv53LnB3o64=",
-    "DB_CONNECTION": "sqlite"
-  },
-  "functions": {
-    "api/index.php": {
-      "runtime": "vercel-php@0.7.3"
+  "builds": [
+    {
+      "src": "api/index.php",
+      "use": "vercel-php@0.7.3"
     }
-  },
+  ],
   "routes": [
     {
       "src": "/build/(.*)",
-      "dest": "/public/build/$1"
+      "dest": "/build/$1"
     },
     {
       "src": "/(.*)",
-      "dest": "/api/index.php"
+      "dest": "api/index.php"
     }
   ]
 }
