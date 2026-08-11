@@ -3,6 +3,13 @@
   "framework": null,
   "outputDirectory": "public",
   "buildCommand": "npm run build",
+  "env": {
+    "PHP_VERSION": "8.3",
+    "APP_ENV": "production",
+    "APP_DEBUG": "true",
+    "APP_KEY": "base64:k+GJlpYlO1Urpj9xPVTGF6PA/yvTLqQNnv53LnB3o64=",
+    "DB_CONNECTION": "sqlite"
+  },
   "functions": {
     "api/index.php": {
       "runtime": "vercel-php@0.7.3"
