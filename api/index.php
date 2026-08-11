@@ -5,6 +5,12 @@ use Illuminate\Http\Request;
 try {
     define('LARAVEL_START', microtime(true));
 
+    // Clear stale Windows bootstrap cache files if present
+    @unlink(__DIR__ . '/../bootstrap/cache/packages.php');
+    @unlink(__DIR__ . '/../bootstrap/cache/services.php');
+    @unlink(__DIR__ . '/../bootstrap/cache/config.php');
+    @unlink(__DIR__ . '/../bootstrap/cache/routes-v7.php');
+
     // Setup writable /tmp storage
     $storagePath = '/tmp/storage';
     foreach ([
