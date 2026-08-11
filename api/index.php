@@ -1,17 +1,18 @@
 <?php
 
+use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 
 try {
     define('LARAVEL_START', microtime(true));
 
-    // Clear stale bootstrap cache files if present
+    // 1. Clear stale bootstrap cache files
     @unlink(__DIR__ . '/../bootstrap/cache/packages.php');
     @unlink(__DIR__ . '/../bootstrap/cache/services.php');
     @unlink(__DIR__ . '/../bootstrap/cache/config.php');
     @unlink(__DIR__ . '/../bootstrap/cache/routes-v7.php');
 
-    // Setup writable /tmp storage
+    // 2. Setup writable /tmp storage
     $storagePath = '/tmp/storage';
     foreach ([
         $storagePath . '/framework/views',
@@ -24,7 +25,7 @@ try {
         }
     }
 
-    // Setup SQLite database
+    // 3. Setup SQLite database
     $dbPath = '/tmp/database.sqlite';
     if (!file_exists($dbPath) && file_exists(__DIR__ . '/../database/database.sqlite')) {
         @copy(__DIR__ . '/../database/database.sqlite', $dbPath);
@@ -44,20 +45,22 @@ try {
 
     require __DIR__ . '/../vendor/autoload.php';
 
+    /** @var \Illuminate\Foundation\Application $app */
     $app = require_once __DIR__ . '/../bootstrap/app.php';
 
+    // 4. Force storage path to /tmp/storage
     $app->useStoragePath($storagePath);
 
-    // Register essential foundation service providers
-    $app->register(new \Illuminate\Filesystem\FilesystemServiceProvider($app));
-    $app->register(new \Illuminate\View\ViewServiceProvider($app));
-    $app->register(new \Illuminate\Session\SessionServiceProvider($app));
+    // 5. Instantiate Kernel and run full framework bootstrapping
+    /** @var Kernel $kernel */
+    $kernel = $app->make(Kernel::class);
+    $kernel->bootstrap();
 
-    if (class_exists(\Livewire\LivewireServiceProvider::class)) {
-        $app->register(new \Livewire\LivewireServiceProvider($app));
-    }
-
-    $app->handleRequest(Request::capture());
+    // 6. Handle HTTP Request
+    $request = Request::capture();
+    $response = $kernel->handle($request);
+    $response->send();
+    $kernel->terminate($request, $response);
 
 } catch (\Throwable $e) {
     http_response_code(200);
